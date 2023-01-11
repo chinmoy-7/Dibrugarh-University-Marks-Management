@@ -6,7 +6,7 @@ const morgan = require("morgan")
 const dotenv = require("dotenv")
 const connectDB = require("./Connect DB/Connect Db")
 const LoginAndSignup = require("./Routes/LoginAndSignup")
-
+const Operations = require("./Routes/Operations")
 // App configs
 dotenv.config()
 const app = express()
@@ -17,6 +17,7 @@ app.use(express.json())
 
 // logic
 app.use("/",LoginAndSignup)
+app.use("/",Operations)
 
 
 // app listen
