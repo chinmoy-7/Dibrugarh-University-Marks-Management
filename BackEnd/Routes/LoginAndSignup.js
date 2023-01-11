@@ -51,7 +51,6 @@ router.post("/api/login", async (req, res) => {
     bcrypt.compare(password, user[0].password, (err, result) => {
       if (result) {
         const token = jwt.sign({ userId: user[0]._id }, process.env.JWT_SECRET);
-
         return res.json({
           status: "success",
           token,
