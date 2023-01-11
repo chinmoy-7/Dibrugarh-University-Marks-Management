@@ -1,0 +1,56 @@
+.landing-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #22263e;
+    color: white;
+}
+
+.landing-container div h1 {
+    text-align: center;
+    font-size: 8vh;
+}
+
+.logo {
+    width: 70vh;
+}
+
+.logo img {
+    width: 100%;
+}
+
+.landing-container p {
+    font-size: 3vh;
+}
+
+.buttons {
+    margin-top: 2vh;
+    width: 50vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.buttons button {
+    cursor: pointer;
+    border: 0;
+    background-color: #4942ce;
+    color: white;
+    border-radius: 30px;
+    font-size: 3vh;
+    height: 10vh;
+    width: 20vh;
+}
+
+@media only screen and (width<=600px) {
+
+    .buttons {
+        flex-direction: column;
+        height: 25vh;
+        justify-content: space-evenly;
+        align-items: center;
+
+    }
+}
