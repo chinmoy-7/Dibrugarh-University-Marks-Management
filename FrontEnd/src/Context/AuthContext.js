@@ -19,7 +19,13 @@ export const AuthContextProvider = ({ children }) => {
 
 
     useEffect(() => {
-        sessionStorage.getItem("token") ? navigate("/select-course") : navigate("/")
+        console.log("yes");
+        if (sessionStorage.getItem("token")) {
+            if (location.pathname === "/" || location.pathname === "log-in" || location.pathname === "/sign-up") {
+                return navigate("/select-course")
+            }
+        }
+        // sessionStorage.getItem("token") ? navigate("/select-course", { replace: true }) : navigate("/")
     }, [])
 
     const Login = async (userData) => {
@@ -40,7 +46,7 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ batch, setBatch, course, setCourse, Login, setIsLoggedIn }}>
+        <AuthContext.Provider value={{ batch, setBatch, course, setCourse, Login, setIsLoggedIn, isLoggedIn }}>
             {children}
         </AuthContext.Provider>
     )

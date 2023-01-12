@@ -11,11 +11,11 @@ export default function SelectCourse() {
     }
 
     return (
-        <div>
+        <div className="container">
             SelectCourse
-            <button onClick={handleCourse}>BCA</button>
-            <button onClick={handleCourse}>MCA</button>
-            <button onClick={handleCourse}>PGDCA</button>
+            <button className="btn btn-primary mx-2" onClick={handleCourse}>BCA</button>
+            <button className="btn btn-primary mx-2" onClick={handleCourse}>MCA</button>
+            <button className="btn btn-primary" onClick={handleCourse}>PGDCA</button>
         </div>
     )
 }

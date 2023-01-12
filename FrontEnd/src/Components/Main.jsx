@@ -18,7 +18,7 @@ export default function Main({ children }) {
             {children}
 
             {sessionStorage.getItem("token") ?
-                <button onClick={handleLogout}>Logout</button> :
+                <button className="btn btn-danger" onClick={handleLogout}>Logout</button> :
                 <></>
             }
         </div>
