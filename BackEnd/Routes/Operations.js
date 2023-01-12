@@ -2,6 +2,7 @@ const router = require("express").Router();
 const register = require("../Models/Registeration");
 const jwt = require("jsonwebtoken");
 const Auth = require("../Middlewares/JWT")
+
 const Batch = require("../Models/Batch")
 const student = require("../Models/Students")
 //Add Batch Year
@@ -41,6 +42,7 @@ router.post("/api/add/students",async(req,res)=>{
             message:e.message
         })
     }
+
 })
 
 module.exports = router;
