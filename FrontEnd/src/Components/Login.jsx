@@ -1,15 +1,31 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
 import { useState } from "react";
 
 import { useAuth } from "../Context/AuthContext";
+import Admin_Key_Modal from "./Admin_Key_Modal";
+import { useEffect } from "react";
 
 export default function Login() {
 
     const auth = useAuth()
-    const navigate = useNavigate()
     const location = useLocation();
+
+    const [modalShow, setModalShow] = useState(false)
+
     const value = location.state.value
+
+    useEffect(() => {
+        if (value === "Admin") {
+            setModalShow(true)
+        }
+
+    }, [])
+
+
+
 
     const [userData, setUserData] = useState({ email: "", password: "" })
 
@@ -21,19 +37,32 @@ export default function Login() {
 
     return (
         <div>
-            {value} Login
-            <div className='container'>
-                <div className="form-floating mb-3">
-                    <input onChange={(e) => { handleInput(e) }} name="email" type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
-                    <label htmlFor="floatingInput">Email address</label>
-                </div>
-                <div className="form-floating">
-                    <input onChange={(e) => { handleInput(e) }} name="password" type="password" className="form-control" id="floatingPassword" placeholder="Password" />
-                    <label htmlFor="floatingPassword">Password</label>
-                </div>
 
-                <button onClick={() => { auth.Login(userData) }} className='btn btn-dark' type='submit'>Login</button>
-            </div>
+            {value === "Admin" && <>
+
+                <Admin_Key_Modal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                />
+            </>}
+
+            {!modalShow &&
+                <div className='container'>
+                    <h1>
+                        {value} Login
+                    </h1>
+                    <div className="form-floating mb-3">
+                        <input onChange={(e) => { handleInput(e) }} name="email" type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
+                        <label htmlFor="floatingInput">Email address</label>
+                    </div>
+                    <div className="form-floating">
+                        <input onChange={(e) => { handleInput(e) }} name="password" type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+                        <label htmlFor="floatingPassword">Password</label>
+                    </div>
+
+                    <button onClick={() => { auth.Login(userData) }} className='btn btn-dark' type='submit'>Login</button>
+                </div>
+            }
         </div >
     )
 }

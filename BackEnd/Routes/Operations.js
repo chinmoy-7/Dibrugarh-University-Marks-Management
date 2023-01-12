@@ -42,7 +42,6 @@ router.post("/api/add/students",async(req,res)=>{
             message:e.message
         })
     }
-
 })
 
 module.exports = router;

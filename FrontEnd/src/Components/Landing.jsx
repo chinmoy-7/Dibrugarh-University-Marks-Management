@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import "../Assets/Style/Landing.css"
 import { useAuth } from "../Context/AuthContext"
@@ -8,6 +9,14 @@ export default function Landing() {
 
     const auth = useAuth()
 
+    useEffect(() => {
+        console.log("lamnnding",auth.isLoggedIn);
+
+        if (auth.isLoggedIn) {
+            navigate("/select-course")
+        }
+    }, [])
+
     return (
         <div className="landing-container">
             <div>
@@ -17,7 +26,7 @@ export default function Landing() {
             </div>
 
             <div className="logo">
-                <img style={{ mixBlendMode: "darken" }} src="./logo.png" alt="" />
+                <img src="./logo.png" alt="" />
             </div>
 
             <p>Welcome!!</p>
