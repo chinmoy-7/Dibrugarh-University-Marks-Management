@@ -9,8 +9,6 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
 
 
-    const [course, setCourse] = useState(null)
-    const [batch, setBatch] = useState(null)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
 
@@ -45,8 +43,27 @@ export const AuthContextProvider = ({ children }) => {
         }
     }
 
+    // signup function
+    const Signup = async (userData) => {
+        console.log(userData);
+        if (userData.password != userData.confirm_password) {
+            return alert("pass do not match")
+        }
+        try {
+            const res = await axios.post("http://localhost:3010/api/signup", userData)
+            console.log(res.data);
+            if (res.data.status === "success") {
+                navigate("/log-in", { state: { value: "Admin" } }, { replace: true })
+            } else {
+                alert(res.data.message)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{ batch, setBatch, course, setCourse, Login, setIsLoggedIn, isLoggedIn }}>
+        <AuthContext.Provider value={{ Login, setIsLoggedIn, isLoggedIn, Signup }}>
             {children}
         </AuthContext.Provider>
     )

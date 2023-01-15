@@ -1,28 +1,26 @@
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../Context/AuthContext";
+import { useData } from "../Context/DataContext";
 
 export default function AddBatch() {
 
-    const auth = useAuth();
-    const navigate = useNavigate();
-    const location = useLocation();
-    const course = location.state.course;
+    const data = useData();
 
-    const handleYear = (e) => {
-        auth.setBatch(e.target.innerText)
-        navigate("/add-update")
+    const handleAddBatch = (e) => {
+        data.createBatch()
     }
+
     return (
         <div>
-            <h1>{course}</h1>
+            <h1>{data.course}</h1>
             <p>
                 AddBatch
             </p>
 
-            <input type="text" />
+            <input maxLength={9} type="text" onChange={(e) => { data.setYear(e.target.value) }} placeholder="xxxx-xxxx" />
 
-            <button>ADD</button>
-            <button onClick={handleYear}>2022-2025</button>
+            <button onClick={handleAddBatch}>ADD</button>
 
         </div >
     )

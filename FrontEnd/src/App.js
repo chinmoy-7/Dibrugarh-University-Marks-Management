@@ -10,22 +10,29 @@ import Signup from "./Components/Signup";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import { AuthContextProvider } from "./Context/AuthContext";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { DataContextProvider } from "./Context/DataContext";
 function App() {
   return (
     <BrowserRouter>
       <AuthContextProvider>
-        <Main>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/log-in" element={<Login />} />
-            <Route path="/sign-up" element={<Signup />} />
+        
+        <DataContextProvider>
 
-            <Route path="/select-course" element={<ProtectedRoute><SelectCourse /></ProtectedRoute>} />
-            <Route path="/add-batch" element={<ProtectedRoute><AddBatch /></ProtectedRoute>} />
-            <Route path="/add-update" element={<ProtectedRoute> <Add_Update /></ProtectedRoute>} />
-            <Route path="/add-student" element={<ProtectedRoute> <AddStudent /></ProtectedRoute>} />
-          </Routes>
-        </Main>
+          <Main>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/log-in" element={<Login />} />
+              <Route path="/sign-up" element={<Signup />} />
+
+              <Route path="/select-course" element={<ProtectedRoute><SelectCourse /></ProtectedRoute>} />
+              <Route path="/add-batch" element={<ProtectedRoute><AddBatch /></ProtectedRoute>} />
+              <Route path="/add-update" element={<ProtectedRoute> <Add_Update /></ProtectedRoute>} />
+              <Route path="/add-student" element={<ProtectedRoute> <AddStudent /></ProtectedRoute>} />
+            </Routes>
+          </Main>
+
+        </DataContextProvider>
+
       </AuthContextProvider>
     </BrowserRouter>
   );

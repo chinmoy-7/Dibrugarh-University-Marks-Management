@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
@@ -8,10 +8,12 @@ import { useAuth } from "../Context/AuthContext";
 import Admin_Key_Modal from "./Admin_Key_Modal";
 import { useEffect } from "react";
 
+
 export default function Login() {
 
     const auth = useAuth()
     const location = useLocation();
+
 
     const [modalShow, setModalShow] = useState(false)
 
@@ -23,9 +25,6 @@ export default function Login() {
         }
 
     }, [])
-
-
-
 
     const [userData, setUserData] = useState({ email: "", password: "" })
 
@@ -61,7 +60,13 @@ export default function Login() {
                     </div>
 
                     <button onClick={() => { auth.Login(userData) }} className='btn btn-dark' type='submit'>Login</button>
+                    {value === "Admin" && <p>Need An Account.
+                        <Link to={"/sign-up"}>
+                            Signup
+                        </Link>
+                    </p>}
                 </div>
+
             }
         </div >
     )
