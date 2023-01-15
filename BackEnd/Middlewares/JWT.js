@@ -6,9 +6,7 @@ const Auth = async (req,res,next)=>{
         const user=jwt.verify(token,process.env.JWT_SECRET)
         res.userId=user.userId
         next();
-        return res.json({
-            status:"success",
-        })
+        console.log("working")
     }else{
         res.json({
             status:"failed",
