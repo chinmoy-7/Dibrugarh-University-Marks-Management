@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "../Context/AuthContext"
+import { useData } from "../Context/DataContext";
 export default function SelectCourse() {
 
-    const auth = useAuth();
+    const data = useData();
     const navigate = useNavigate();
 
     const handleCourse = (e) => {
-        auth.setCourse(e.target.innerText)
-        navigate("/add-batch", { state: { course: e.target.innerText } })
+
+        data.setCourse(e.target.innerText)
+        console.log(data.course);
+        navigate("/add-batch")
     }
 
     return (
