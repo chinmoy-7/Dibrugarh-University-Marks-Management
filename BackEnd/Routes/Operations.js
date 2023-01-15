@@ -23,7 +23,6 @@ router.post("/api/add/batch", Auth, async (req, res) => {
 //Get Batches
 router.get("/get/batch/:batch", Auth, async (req, res) => {
   try {
-    console.log("working")
     let { batch } = req.params;
     batch = batch.toUpperCase();
     console.log(batch);
@@ -69,5 +68,29 @@ router.post("/api/add/students", Auth, async (req, res) => {
     });
   }
 });
+
+//Delete Batch
+router.delete("/api/batch/delete/:id",Auth,async(req,res)=>{
+  try{
+    const {id}=req.params
+    console.log(id)
+    const deleted=await Batch.deleteOne({_id:id});
+    if(deleted.deletedCount==0){
+      return res.json({
+        status:"failed",
+        message:"No Batch Found"
+      })
+    }
+    res.json({
+      status:"success"
+    })
+
+  }catch(e){
+    res.json({
+      status:"failed",
+      message:e.message
+    })
+  }
+})
 
 module.exports = router;
