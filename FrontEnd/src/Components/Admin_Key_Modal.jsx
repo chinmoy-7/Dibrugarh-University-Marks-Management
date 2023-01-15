@@ -10,6 +10,7 @@ export default function Admin_Key_Modal(props) {
 
 
     const handleSubmit = () => {
+        console.log(process.env.REACT_APP_ADMIN_KEY);
         if (input === process.env.REACT_APP_ADMIN_KEY) {
             props.onHide()
         } else {
@@ -26,7 +27,7 @@ export default function Admin_Key_Modal(props) {
 
     function handleKeydown(event) {
         if (event.key === 'Escape') {
-            event.preventDefault();
+          return event.preventDefault();
         }
     }
 
@@ -41,7 +42,7 @@ export default function Admin_Key_Modal(props) {
         >
             <Modal.Body>
                 <h4>Enter Admin Key To Continue</h4>
-                <input className='mx-2' type={showKey ? "text" : "password"} onChange={(e) => { setInput(e.target.value) }} />
+                <input className='mx-2'autoFocus type={showKey ? "text" : "password"} onChange={(e) => { setInput(e.target.value) }} />
                 <span onClick={() => { SetShowKey(!showKey) }}>{showKey ? "Hide" : "Show"}</span>
             </Modal.Body>
             <Modal.Footer>

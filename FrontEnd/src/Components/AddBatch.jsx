@@ -5,6 +5,8 @@ import { useData } from "../Context/DataContext";
 import "../Assets/Style/addBatch.css";
 import { useEffect } from "react";
 export default function AddBatch() {
+
+  const navigate = useNavigate()
   const data = useData();
 
   const [del,setDel]=useState(false)
@@ -12,6 +14,7 @@ export default function AddBatch() {
   const [selectedYear,setSelectedYear]=useState()
 
   const handleAddBatch = (e) => {
+    console.log("add");
     data.createBatch();
   };
   useEffect(()=>{
@@ -24,6 +27,9 @@ export default function AddBatch() {
 
 
   const handleDelete=(id,year)=>{
+    if(!del){
+      navigate("/add-update")
+    }
     if(del){
     setSelectedDel(true);
     }
@@ -57,7 +63,7 @@ export default function AddBatch() {
         <div className="batch-content-bottom">
             <div className="batch-content-bottom-box ">
               {data?.allBatch?.map((item,id)=>{
-                console.log(data.allBatch)
+                // console.log(data.allBatch)
                 return(
                   <button key={id}  onClick={(e)=>{handleDelete(item._id,item.year)}}>{item.year}</button>
                 )

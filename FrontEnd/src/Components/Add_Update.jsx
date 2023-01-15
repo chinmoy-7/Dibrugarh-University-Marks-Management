@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom"
-
+import "../Assets/Style/add_update.css"
 export default function Add_Update() {
     const navigate = useNavigate();
     return (
-        <div>
-            Add_Update
+        <div className="functionalities-container">
+            <div className="functionality-content">
 
-            <button onClick={() => { navigate("/add-student") }}>ADD students</button>
-            <button>Update marks</button>
+                <button onClick={() => { navigate("/add-student") }}>ADD students</button>
+                <button >Update Marks</button>
+                <button>Add Subjects</button>
 
+            </div>
         </div>
     )
 }

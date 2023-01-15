@@ -1,0 +1,28 @@
+.functionalities-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--darkblue);
+    z-index: -10;
+}
+
+.functionality-content {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.functionality-content button {
+    height: 25%;
+    width: 25%;
+    border: 0px;
+    background-color: var(--lightblue);
+    border-radius: 10px;
+    margin-left: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 1.3rem;
+    font-weight: 500;
+}
