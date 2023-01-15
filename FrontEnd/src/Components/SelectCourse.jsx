@@ -1,15 +1,18 @@
 import { useNavigate } from "react-router-dom"
 import { useData } from "../Context/DataContext";
 import '../Assets/Style/selected.css'
+import { useAuth } from "../Context/AuthContext";
+import { useEffect } from "react";
 export default function SelectCourse() {
 
     const data = useData();
+    const auth=useAuth()
     const navigate = useNavigate();
-
     const handleCourse = (e) => {
 
         data.setCourse(e.target.innerText)
-        console.log(data.course);
+        localStorage.setItem("course",e.target.innerText);
+        // console.log(data.course);
         navigate("/add-batch")
     }
 
