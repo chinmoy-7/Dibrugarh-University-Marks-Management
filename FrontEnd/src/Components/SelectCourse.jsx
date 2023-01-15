@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useData } from "../Context/DataContext";
+import '../Assets/Style/selected.css'
 export default function SelectCourse() {
 
     const data = useData();
@@ -13,11 +14,11 @@ export default function SelectCourse() {
     }
 
     return (
-        <div className="container">
-            SelectCourse
-            <button className="btn btn-primary mx-2" onClick={handleCourse}>BCA</button>
-            <button className="btn btn-primary mx-2" onClick={handleCourse}>MCA</button>
-            <button className="btn btn-primary" onClick={handleCourse}>PGDCA</button>
+        <div className="select-course-container">
+            <h1>Select Course</h1>
+            <button className="btn btn-primary mx-2 btns" onClick={handleCourse}>BCA</button>
+            <button className="btn btn-primary mx-2 btns" onClick={handleCourse}>MCA</button>
+            <button className="btn btn-primary btns" onClick={handleCourse}>PGDCA</button>
         </div>
     )
 }

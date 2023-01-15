@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext"
-
+import '../Assets/Style/main.css'
 export default function Main({ children }) {
     const navigate = useNavigate()
 
@@ -18,7 +18,7 @@ export default function Main({ children }) {
             {children}
 
             {sessionStorage.getItem("token") ?
-                <button className="btn btn-danger" onClick={handleLogout}>Logout</button> :
+                <button id="btn-logout"className="btn btn-danger" onClick={handleLogout}>Logout</button> :
                 <></>
             }
         </div>
