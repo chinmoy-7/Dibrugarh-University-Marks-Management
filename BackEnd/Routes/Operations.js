@@ -49,18 +49,29 @@ router.get("/get/batch/:batch", Auth, async (req, res) => {
 //Add Students
 router.post("/api/add/students", Auth, async (req, res) => {
   try {
-    const { year, course } = req.body;
+    let { year, course } = req.body.studentData;
+    course=course.toUpperCase()
     const batch = await Batch.find({ year: year, course: course });
+    const exists= await student.find({rollno:req.body.studentData.rollno})
+    console.log(exists.length)
+    if(exists.length!=0){
+     return  res.json({
+        status:"failed"
+      })
+    }
     const newStudent = await student.create({
       batchId: batch[0]._id,
       batchYear: year,
-      email: req.body.email,
-      name: req.body.name,
-      rollno: req.body.rollno,
-      password: req.body.password,
+      email: req.body.studentData.email,
+      name: req.body.studentData.name,
+      rollno: req.body.studentData.rollno,
+      password: req.body.studentData.password,
       course: course,
     });
-    console.log(newStudent);
+    res.json({
+      status:"success"
+    })
+    // console.log(newStudent);
   } catch (e) {
     res.json({
       status: "failed",

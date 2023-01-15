@@ -1,0 +1,30 @@
+.add-student-container{
+    height: 100vh;
+    background-color: var(--darkblue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* color: white; */
+}
+.add-student-container>form>h1{
+    color: white;
+    text-align: center;
+}
+.add-student-container>form{
+    height: 70%;
+    width: 40%;
+    /* background-color: white; */
+}
+.add-student-container>form>div{
+    margin-top:40px
+}
+
+#add-submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.add-student-container>form>div>button{
+    width: 50%;
+}

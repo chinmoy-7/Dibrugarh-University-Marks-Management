@@ -34,6 +34,7 @@ export default function AddBatch() {
   const handleDelete = async (id, year) => {
     if (!del) {
       navigate("/add-update")
+      localStorage.setItem("year",year)
     }
     if (del) {
       setSelectedDel(true);
