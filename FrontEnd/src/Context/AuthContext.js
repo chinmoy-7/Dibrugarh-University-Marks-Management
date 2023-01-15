@@ -10,14 +10,13 @@ export const AuthContextProvider = ({ children }) => {
 
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-
+    const [selectedCourse,setSelectedCourse]=useState();
 
     const navigate = useNavigate();
     const location = useLocation();
 
 
     useEffect(() => {
-        console.log("yes");
         if (sessionStorage.getItem("token")) {
             if (location.pathname === "/" || location.pathname === "log-in" || location.pathname === "/sign-up") {
                 return navigate("/select-course")
@@ -63,7 +62,7 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ Login, setIsLoggedIn, isLoggedIn, Signup }}>
+        <AuthContext.Provider value={{ Login, setIsLoggedIn, isLoggedIn, Signup,selectedCourse,setSelectedCourse }}>
             {children}
         </AuthContext.Provider>
     )
