@@ -7,7 +7,7 @@ export default function Add_Update() {
             <div className="functionality-content">
 
                 <button onClick={() => { navigate("/add-student") }}>ADD students</button>
-                <button >Update Marks</button>
+                <button onClick={() => { navigate("/choose-semester") }}>Update Marks</button>
                 <button>Add Subjects</button>
 
             </div>

@@ -19,7 +19,6 @@ export default function AddBatch() {
 
 
   const handleAddBatch = (e) => {
-    console.log("add");
     data.createBatch();
   };
   useEffect(() => {

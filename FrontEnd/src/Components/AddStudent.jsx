@@ -9,7 +9,6 @@ export default function AddStudent() {
 
 
     const [studentData,setStudentData]=useState({year:localStorage.getItem("token"),name:"",email:"",course:localStorage.getItem("course"),rollno:"",year:localStorage.getItem("year")});
-    const data = useData()
 
 
     const handleStudentSubmit=async (e)=>{

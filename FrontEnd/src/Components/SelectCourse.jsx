@@ -5,16 +5,26 @@ import { useAuth } from "../Context/AuthContext";
 import { useEffect } from "react";
 export default function SelectCourse() {
 
+
+
+
     const data = useData();
-    const auth=useAuth()
+    const auth = useAuth()
     const navigate = useNavigate();
     const handleCourse = (e) => {
 
         data.setCourse(e.target.innerText)
-        localStorage.setItem("course",e.target.innerText);
+        localStorage.setItem("course", e.target.innerText);
         // console.log(data.course);
         navigate("/add-batch")
     }
+
+    useEffect(() => {
+        data.setStudents(null)
+        if (localStorage.getItem("semester")) {
+            localStorage.clear()
+        }
+    }, [])
 
     return (
         <div className="select-course-container">

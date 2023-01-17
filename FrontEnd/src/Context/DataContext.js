@@ -7,6 +7,48 @@ const DataContext = createContext();
 
 
 export const DataContextProvider = ({ children }) => {
+
+    const headers = { "authorization": sessionStorage.getItem("token") };
+
+
+
+    const [students, setStudents] = useState(null)
+
+    const getStudsBySem = async (id) => {
+
+        console.log("hit");
+
+        try {
+            const res = await axios.post(`http://localhost:3010/api/batch/getStudents`,
+                {
+                    year: localStorage.getItem("year"),
+                    course: localStorage.getItem("course"), id
+                }, { headers })
+            console.log(res.data);
+            setStudents(res.data)
+            // setDetails({ year: "", course: "" })
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    const updateMarks = async (data) => {
+        try {
+            const res = await axios.put("http://localhost:3010/api/batch/update-marks", data, { headers })
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
+    // ----------------------------------------------COURSE-----------------------------------------------//
+
+
+
     const [course, setCourse] = useState("")
     const [year, setYear] = useState("")
     const [allBatch, setAllBatch] = useState(null)
@@ -24,7 +66,7 @@ export const DataContextProvider = ({ children }) => {
             if (checkBatch(year)) {
                 return
             }
-            const headers = { "authorization": sessionStorage.getItem("token") };
+
             console.log(headers)
             const res = await axios.post("http://localhost:3010/api/add/batch", { course, year }, { headers })
             alert("Successfully added")
@@ -74,7 +116,11 @@ export const DataContextProvider = ({ children }) => {
 
 
     return (
-        <DataContext.Provider value={{ course, setCourse, year, setYear, createBatch, getBatch, allBatch }}>
+        <DataContext.Provider value={{
+            course, setCourse, year, setYear,
+            createBatch, getBatch, allBatch,
+            students, setStudents, getStudsBySem, updateMarks
+        }}>
             {children}
         </DataContext.Provider>
     )
