@@ -11,34 +11,35 @@ export default function Students_Details() {
 
 
     useEffect(() => {
-        console.log("rerender3ed");
+
         data.getStudsBySem()
     }, [])
 
 
     const handleSearch = (e) => {
-
-
-        let regSearch = new RegExp(/[^\0-9\s]/g)
-
+        console.log(e);
         const res = data.students.filter(stud => {
-            return (stud.roll.match(regSearch))
+
+            if (stud.rollno === e) {
+                return stud
+            }
         })
-        console.log(res[0]);
         setFiltered(res[0])
     }
     const navigate = useNavigate()
 
-    const takeToUpdate = (id) => {
-        console.log(id);
-        navigate("/update-marks", { state: { id: id } })
+    const takeToUpdate = (stud) => {
+        if (stud) {
+            navigate("/update-marks", { state: { student: stud } })
+        } else
+            navigate("/update-marks", { state: { student: filtered } })
     }
 
 
     return (
         <div className="container">
             Students_Details
-            <input type="text" onChange={(e) => { handleSearch(e) }} />
+            <input type="text" onChange={(e) => { handleSearch(e.target.value) }} />
             <table className="table table-striped-columns" style={{
                 width: "100%",
                 borderCollapse: "collapse",
@@ -60,18 +61,18 @@ export default function Students_Details() {
                         </th>
                     </tr>
                 </thead>
-                
+
                 {!filtered ? <tbody>
 
-                    {data.students && data.students.map((stud, id) => {
+                    {data.students && data.students.map((stud, idx) => {
 
                         return (
-                            <tr key={id}>
+                            <tr key={idx}>
                                 {console.log(stud)}
                                 <td>{stud.rollno}</td>
                                 <td>{stud.name}</td>
                                 <td>{stud.email}</td>
-                                <td onClick={() => { takeToUpdate(stud._id) }}>➡</td>
+                                <td onClick={() => { takeToUpdate(stud) }}>➡</td>
                             </tr>
                         )
                     })}
@@ -83,7 +84,7 @@ export default function Students_Details() {
                             <td>{filtered.rollno}</td>
                             <td>{filtered.name}</td>
                             <td>{filtered.email}</td>
-                            <td onClick={(stud) => { takeToUpdate(stud._id) }}>➡</td>
+                            <td onClick={(stud) => { takeToUpdate() }}>➡</td>
                         </tr>
                     </tbody>
                 }

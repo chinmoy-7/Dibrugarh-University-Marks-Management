@@ -24,9 +24,10 @@ export const DataContextProvider = ({ children }) => {
                     year: localStorage.getItem("year"),
                     course: localStorage.getItem("course"), id
                 }, { headers })
-            console.log(res.data);
+
+
             setStudents(res.data)
-            // setDetails({ year: "", course: "" })
+
 
         } catch (error) {
             console.log(error);

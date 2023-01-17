@@ -11,29 +11,30 @@ export default function Update_Marks() {
     const location = useLocation()
 
     const [subjects, setSubjects] = useState([])
+
     let [marks, setMarks] = useState([])
+
     const [cancel, setCancel] = useState(false)
 
 
+    const student = location.state.student;
+
     useEffect(() => {
 
-        data.getStudsBySem(location.state.id)
-
-        console.log(data.students[0]);
 
         let subs = []
         let mar = []
 
-        for (let i of Object.entries(data.students[0].semester[localStorage.getItem("semester") - 1])) {
+        for (let i of Object.entries(student.semester[localStorage.getItem("semester") - 1])) {
             subs.push(i[0])
             mar.push(i[1])
         }
 
         setSubjects(subs)
         setMarks(mar)
-        console.log(subjects, marks);
 
     }, [cancel])
+    
 
 
     const [edit, setEdit] = useState(false)
@@ -46,15 +47,11 @@ export default function Update_Marks() {
     }
 
     const saveMarks = (e, idx) => {
-        console.log(e.target.value);
         let temp = marks.filter((mark, id) => {
-            console.log(mark, id, idx);
             if (id === idx) {
-                // console.log(marks[id]);
                 return marks[id] = Number(e.target.value)
             } else return mark
         })
-        console.log(temp);
         setMarks(temp)
     }
 
@@ -64,22 +61,25 @@ export default function Update_Marks() {
         if (action === "cancel") {
             setEdit(false)
             setCancel(!cancel)
+            return
         } else if (action === "save") {
             console.log("save");
+
             for (let i = 0; i < marks.length; i++) {
                 updatedMarks[subjects[i]] = marks[i]
             }
+
+            setEdit(false)
+
+            let newMarksArray = [...student.semester]
+
+            newMarksArray[localStorage.getItem("semester") - 1] = updatedMarks
+            console.log(newMarksArray);
+
+            let updateData = { newMarksArray, semester: localStorage.getItem("semester") - 1, id: student._id }
+            data.updateMarks(updateData)
+            console.log(updatedMarks);
         }
-        setEdit(false)
-
-        let newMarksArray = [...data.students[0].semester]
-
-        newMarksArray[localStorage.getItem("semester") - 1] = updatedMarks
-        console.log(newMarksArray);
-        
-        let updateData = { newMarksArray, semester: localStorage.getItem("semester") - 1, id: data.students[0]._id }
-        data.updateMarks(updateData)
-        console.log(updatedMarks);
     }
 
     return (
@@ -93,10 +93,10 @@ export default function Update_Marks() {
                 <div>
 
                     <div>
-                        Name:  {data.students[0].name}
+                        Name:  {student.name}
                     </div>
                     <div>
-                        RollNo: {data.students[0].rollno}
+                        RollNo: {student.rollno}
                     </div>
                 </div>
 
@@ -142,10 +142,10 @@ export default function Update_Marks() {
                             return (
 
                                 <td key={idx}>
-                                    <input type="text" style={{
+                                    <input minLength={1} maxLength={3} type="text" style={{
                                         border: "0",
                                         backgroundColor: "transparent"
-                                    }} value={marks[idx]} disabled={!edit}
+                                    }} value={mark} disabled={!edit}
                                         onChange={(e) => { changeMarks(e, idx) }}
                                         onBlur={(e) => { saveMarks(e, idx) }}
                                     />

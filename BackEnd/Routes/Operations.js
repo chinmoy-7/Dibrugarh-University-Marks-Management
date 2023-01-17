@@ -156,7 +156,7 @@ router.put("/api/batch/update-marks", Auth, async (req, res) => {
     // console.log(req.body.updatedMarks);
     const stud = await student.findOneAndUpdate({ _id: req.body.id }, { $set: { semester: req.body.newMarksArray } })
     console.log(stud);
-    res.json(200)
+    res.status(200).json("done")
   } catch (error) {
     res.sendStatus(400).json("Server Error")
     console.log(error);
